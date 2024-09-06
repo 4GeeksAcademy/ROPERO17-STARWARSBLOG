@@ -1,6 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
+		store: 
+		{
+            people: [],
+            planets: [],
+            vehicles: [],
+            favorites: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -37,9 +42,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			
+				fetchData: async (category) => {
+					try {
+						const resp = await fetch(`https://www.swapi.tech/api/${category}`);
+						const data = await resp.json();
+						setStore({ [category]: data.results });
+					} catch (error) {
+						console.error("Error fetching data:", error);
+					}
+				},
+				getCharacters: () => {
+					fetch("https://www.swapi.tech/api/people/")
+						.then(res => res.json())
+						.then(data => setStore({ characters: data.results }));
+				},
+				getPlanets: () => {
+					fetch("https://www.swapi.tech/api/planets/")
+						.then(res => res.json())
+						.then(data => setStore({ planets: data.results }));
+				},
+				getVehicles: () => {
+					fetch("https://www.swapi.tech/api/vehicles/")
+						.then(res => res.json())
+						.then(data => setStore({ vehicles: data.results }));
+				},
+				addFavorite: (item) => {
+					const store = getStore();
+					if (!store.favorites.includes(item)) {
+						setStore({ favorites: [...store.favorites, item] });
+					}
+				},
+				removeFavorite: (item) => {
+					const store = getStore();
+					setStore({ favorites: store.favorites.filter(fav => fav !== item) });
+				}
 			}
-		}
-	};
-};
+		};
+	}
+	
+
 
 export default getState;

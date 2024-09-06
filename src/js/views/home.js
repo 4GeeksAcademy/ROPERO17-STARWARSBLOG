@@ -1,15 +1,34 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+import "../../styles/home.css";
+import React, { useEffect, useContext } from 'react';
+import HorizontalList from '../component/horizontallist';
+import { Context } from '../store/appContext';
+
+export const Home = () => {
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+        actions.getCharacters(); // Llamada para obtener personajes
+        actions.getPlanets(); // Llamada para obtener planetas
+        actions.getVehicles(); // Llamada para obtener vehículos
+    }, []);
+
+    return (
+        <div className="container">
+            <h1>Star Wars Blog</h1>
+
+            <h2>Characters</h2>
+            <HorizontalList items={store.characters} />
+
+            <h2>Planets</h2>
+            <HorizontalList items={store.planets} />
+
+            <h2>Vehicles</h2>
+            <HorizontalList items={store.vehicles} />
+        </div>
+    );
+};
+
+
+export default Home;
+
