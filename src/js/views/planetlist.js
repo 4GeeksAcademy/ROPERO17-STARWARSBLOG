@@ -17,6 +17,9 @@ export const PlanetList = () => {
     const id = url.split("/").filter(Boolean).pop();
     return `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`;
   };
+  const handleFavorite = (planet) => {
+    actions.PlanetFavorite(planet);
+  };
   return (
     <div className="container">
       <div className="card-list-container">
@@ -27,7 +30,10 @@ export const PlanetList = () => {
               <div className="card-body">
                 <h5 className="card-title">{planet.name}</h5>
                 <p className="card-content">{planet.climate} {planet.population}</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <a href="#" className="btn btn-primary">Ver detalle</a>
+                <button className="btn btn-outline-warning" onClick={() => handleFavorite(planet)}>
+                    {store.favorites.includes(planet) ? "★" : "☆"} {/* Filled or empty star */}
+                  </button>
               </div>
             </div>
           ))}

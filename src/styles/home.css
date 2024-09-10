@@ -67,3 +67,19 @@
     padding: 5px 10px;
     align-self: flex-end; /* Alinea el botón a la derecha si lo deseas */
   }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espacia el contenido en la tarjeta */
+    height: 100%; /* Asegura que el cuerpo de la tarjeta ocupe toda la altura */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Distribuye los botones uno a la izquierda y otro a la derecha */
+    margin-top: auto; /* Coloca los botones en la parte inferior */
+  }
+  
+  .card-content {
+    flex-grow: 1; /* Esto expande el contenido para ocupar el espacio necesario */
+  }

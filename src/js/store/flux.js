@@ -3,6 +3,7 @@
 				store: {
 					characters: [],
 					planets: [],
+					favorites: [],
 				},
 				actions: {
 					loadCharacters: () => {
@@ -42,7 +43,35 @@
 								setStore({ planets });
 							})
 							.catch(err => console.error(err));
-					}
+					},
+					CharacterFavorite: (character) => {
+						const store = getStore();
+						const isFavorite = store.favorites.find(fav => fav.uid === character.uid);
+					  
+						if (isFavorite) {
+						  setStore({
+							favorites: store.favorites.filter(fav => fav.uid !== character.uid)
+						  });
+						} else {
+						  setStore({
+							favorites: [...store.favorites, character]
+						  });
+						}
+					  },
+					  PlanetFavorite: (planet) => {
+						const store = getStore();
+						const isFavorite = store.favorites.find(fav => fav.uid === planet.uid);
+					  
+						if (isFavorite) {
+						  setStore({
+							favorites: store.favorites.filter(fav => fav.uid !== planet.uid)
+						  });
+						} else {
+						  setStore({
+							favorites: [...store.favorites, planet]
+						  });
+						}
+					  },  
 				}
 				
 			};
