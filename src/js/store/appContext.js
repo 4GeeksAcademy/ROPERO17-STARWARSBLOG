@@ -20,6 +20,16 @@ const injectContext = PassedComponent => {
 					})
 			})
 		);
+		useEffect(() => {
+			
+			state.actions.loadCharacters
+			
+		}, []);
+		useEffect(() => {
+			
+			state.actions.loadPlanets
+			
+		}, []);
 
 		useEffect(() => {
 			/**

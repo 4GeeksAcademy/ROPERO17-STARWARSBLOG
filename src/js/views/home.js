@@ -1,31 +1,21 @@
 
 import "../../styles/home.css";
 import React, { useEffect, useContext } from 'react';
-import HorizontalList from '../component/horizontallist';
 import { Context } from '../store/appContext';
+import { CardList } from "./cardlist";
+import { PlanetList } from "./planetlist";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
-
-	useEffect(() => {
-        actions.getCharacters(); // Llamada para obtener personajes
-        actions.getPlanets(); // Llamada para obtener planetas
-        actions.getVehicles(); // Llamada para obtener vehículos
-    }, []);
+	
+	
 
     return (
-        <div className="container">
-            <h1>Star Wars Blog</h1>
-
-            <h2>Characters</h2>
-            <HorizontalList items={store.characters} />
-
-            <h2>Planets</h2>
-            <HorizontalList items={store.planets} />
-
-            <h2>Vehicles</h2>
-            <HorizontalList items={store.vehicles} />
-        </div>
+        <div>
+		<h1>Characters</h1>
+		<CardList />
+		<h1>Planets</h1>
+		<PlanetList />
+	  </div>
     );
 };
 
