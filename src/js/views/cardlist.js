@@ -7,6 +7,7 @@ export const CardList = () => {
   const { store, actions } = useContext(Context);
 
   useEffect(() => {
+    console.log("Loading characters...");
     actions.loadCharacters();
   }, [actions]);
 
@@ -14,9 +15,8 @@ export const CardList = () => {
     return <div>Loading...</div>;
   }
 
-  const getCharacterImageUrl = (url) => {
-    const id = url.split("/").filter(Boolean).pop();
-    return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+  const getCharacterImageUrl = (character) => {
+    return `https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`;
   };
 
   const handleFavorite = (character) => {
@@ -29,14 +29,18 @@ export const CardList = () => {
         <div className="card-list row flex-nowrap overflow-auto">
           {store.characters.map(character => (
             <div className="card" key={character.uid}>
-              <img src={getCharacterImageUrl(character.url)} className="card-img-top" alt={character.name} />
+              <img src={getCharacterImageUrl(character)} className="card-img-top" alt={character.name} />
               <div className="card-body">
                 <h5 className="card-title">{character.name}</h5>
-                <p className="card-content">{character.birth_year} {character.eye_color} {character.gender}</p>
+                <p className="card-content">
+                  {character.birth_year && `Birth Year: ${character.birth_year}`}
+                  {character.eye_color && ` Eye Color: ${character.eye_color}`}
+                  {character.gender && ` Gender: ${character.gender}`}
+                </p>
                 <div className="button-container">
-                  <Link to={`views/characterdetail/${character.uid}`} className="btn btn-primary">Ver detalle</Link>
+                <Link to={`/character/${character.uid}`} className="btn btn-info">Details</Link>
                   <button className="btn btn-outline-warning" onClick={() => handleFavorite(character)}>
-                    {store.favorites.includes(character) ? "★" : "☆"} {/* Filled or empty star */}
+                    {store.favorites.some(fav => fav.uid === character.uid) ? "★" : "☆"}
                   </button>
                 </div>
               </div>

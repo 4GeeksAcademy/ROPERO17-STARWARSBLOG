@@ -7,7 +7,7 @@ export const PlanetList = () => {
 
   useEffect(() => {
     actions.loadPlanets();
-  }, [actions]);
+  }, );
 
   if (!store.planets.length) {
     return <div>Loading...</div>;
