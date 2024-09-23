@@ -8,8 +8,8 @@
   }
   
   .card {
-    min-width: 150px; /* Ajusta el ancho de la carta */
-    max-width: 150px; /* Controla el tamaño máximo */
+    min-width: 200px; /* Ajusta el ancho de la carta */
+    max-width: 200px; /* Controla el tamaño máximo */
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;

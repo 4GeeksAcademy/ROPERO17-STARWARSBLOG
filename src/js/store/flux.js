@@ -27,6 +27,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(err => console.error(err));
 			},
+			loadSinglePlanet: (id) => {
+                fetch(`https://www.swapi.tech/api/planets/${id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const { description, properties } = data.result;
+                        setStore({ 
+                            singlePlanet: {
+                                uid: id,
+                                description,
+                                ...properties
+                            }
+                        });
+                    })
+                    .catch(err => console.error(err));
+            },
 			loadPlanets: () => {
 				fetch("https://www.swapi.tech/api/planets/")
 					.then(res => res.json())

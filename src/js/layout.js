@@ -7,6 +7,7 @@ import { Single } from "./views/single";
 import { CardList } from "./views/cardlist";
 import { PlanetList } from "./views/planetlist";
 import  CharacterDetail  from "./views/characterdetail.js";
+import  PlanetDetail  from "./views/planetdetail";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import injectContext from "./store/appContext.js";
@@ -30,6 +31,7 @@ const Layout = () => {
 				  <Route path="/planet" element={<PlanetList />} />
 				  <Route path="/single/:theid" element={<Single />} />
 				  <Route path="/character/:id" element={<CharacterDetail />} />
+				  <Route path="/planet/:id" element={<PlanetDetail />} />
 				  <Route path="*" element={<h1>Not found!</h1>} />
 				</Routes>
 			</Suspense>
